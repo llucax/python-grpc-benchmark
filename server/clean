@@ -1,0 +1,6 @@
+#!/bin/sh
+
+. $(dirname 0)/config
+
+rm -vf server *.o test.pb.cc test.pb.h test.grpc.pb.cc test.grpc.pb.h $PROTO_FILE
+docker image rm -f $DOCKER_IMAGE

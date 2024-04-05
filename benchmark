@@ -1,0 +1,19 @@
+#!/bin/sh
+
+. server/config
+
+docker kill $CONTAINER_NAME > /dev/null 2>&1
+
+./server/run > /dev/null 2>&1
+
+for d in grpcio grpclib
+do
+    printf "Benchmarking $d: "
+    cd $d
+    . venv/bin/activate
+    python -m timeit -s "import client, asyncio" "asyncio.run(client.run('test'))"
+    deactivate
+    cd ..
+done
+
+docker kill $CONTAINER_NAME > /dev/null 2>&1

@@ -1,0 +1,5 @@
+DOCKER_IMAGE=grpc-cpp:latest
+PROTO_PATH=..
+PROTO_FILE=test.proto
+DOCKER_RUN="docker run --rm -v $PWD:$PWD -w $PWD"
+CONTAINER_NAME=grpc-server

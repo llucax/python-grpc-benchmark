@@ -1,0 +1,10 @@
+#!/bin/sh
+if test -d venv; then
+    echo "venv already exists"
+else
+    python3.11 -m venv venv
+fi
+. venv/bin/activate
+python -m pip install -r requirements.txt
+python -m grpc_tools.protoc -I.. --python_betterproto_out=. test.proto
+python -m pip freeze

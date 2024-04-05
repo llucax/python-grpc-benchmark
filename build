@@ -1,0 +1,8 @@
+#!/bin/sh
+for d in grpcio grpclib server
+do
+    echo "Building $d"
+    cd $d
+    ./build
+    cd ..
+done

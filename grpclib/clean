@@ -1,0 +1,3 @@
+#!/bin/sh
+
+rm -rvf __pycache__ __init__.py test venv
