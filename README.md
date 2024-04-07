@@ -85,7 +85,8 @@ grpclib
 
 ### Building
 
-Run `./build` to build the Docker image for the server and generate the Python bindings for the clients.
+Run `./build` to build the Docker image for the server and generate the Python
+bindings for the clients.
 
 ### Running
 
