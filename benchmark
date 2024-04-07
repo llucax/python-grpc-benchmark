@@ -6,12 +6,17 @@ docker kill $CONTAINER_NAME > /dev/null 2>&1
 
 ./server/run > /dev/null 2>&1
 
+num_numbers=10
+
 for d in grpcio grpclib
 do
-    printf "Benchmarking $d: "
     cd $d
     . venv/bin/activate
-    python -m timeit -s "import client, asyncio" "asyncio.run(client.run('test'))"
+    echo "$d"
+    printf "\t1 request-reply:       "
+    python -m timeit -s "import client, asyncio" "asyncio.run(client.say_hello('test'))"
+    printf "\tstreaming $num_numbers numbers:  "
+    python -m timeit -s "import client, asyncio" "asyncio.run(client.stream_numbers($num_numbers))"
     deactivate
     cd ..
 done

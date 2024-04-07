@@ -17,12 +17,18 @@ Also the performance comparison in the issue was using the sync version of
 ## Results
 
 My results show that [betterproto]/[grpclib] is actually, at the time of
-writing, about 2 times **faster** than [grpcio]:
+writing, **about 2 times faster** than [grpcio] for a single request-reply
+roundtrip, and **about 1.5 times faster** than [grpcio] for streaming 10
+numbers.
 
 ```console
 $ ./benchmark 
-Benchmarking grpcio: 100 loops, best of 5: 3.75 msec per loop
-Benchmarking grpclib: 200 loops, best of 5: 1.25 msec per loop
+grpcio
+        1 request-reply:       100 loops, best of 5: 3.06 msec per loop
+        streaming 10 numbers:  100 loops, best of 5: 3.32 msec per loop
+grpclib
+        1 request-reply:       200 loops, best of 5: 1.68 msec per loop
+        streaming 10 numbers:  100 loops, best of 5: 2.33 msec per loop
 ```
 
 ### Test conditions

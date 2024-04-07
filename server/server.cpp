@@ -1,3 +1,4 @@
+#include <iostream>
 #include <grpc++/grpc++.h>
 
 #include "test.grpc.pb.h"
@@ -8,13 +9,30 @@ using grpc::ServerContext;
 using grpc::Status;
 using test::HelloRequest;
 using test::HelloReply;
+using test::StreamRequest;
+using test::NumberReply;
 using test::Greeter;
 
 // Logic and data behind the server's behavior.
 class GreeterServiceImpl final : public Greeter::Service {
     Status SayHello(ServerContext* context, const HelloRequest* request, HelloReply* reply) override {
         std::string prefix("Hello, ");
+        std::cout << "Received SayHello request: " << request->name() << std::endl;
         reply->set_message(prefix + request->name());
+        return Status::OK;
+    }
+    Status StreamNumbers(ServerContext* context, const StreamRequest* request, grpc::ServerWriter<NumberReply>* writer) override {
+        int number = 1;
+        std::cout << "Received StreamNumbers request" << std::endl;
+        while (true) {
+            NumberReply reply;
+            std::cout << "Sending number " << number << std::endl;
+            reply.set_number(number++);
+            if (!writer->Write(reply)) {
+                std::cout << "Client disconnected" << std::endl;
+                break; // Break the loop if the client has disconnected
+            }
+        }
         return Status::OK;
     }
 };

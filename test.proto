@@ -6,6 +6,8 @@ package test;
 service Greeter {
   // Sends a greeting
   rpc SayHello (HelloRequest) returns (HelloReply) {}
+  // Stream of numbers
+  rpc StreamNumbers (StreamRequest) returns (stream NumberReply) {}
 }
 
 // The request message containing the user's name.
@@ -16,4 +18,13 @@ message HelloRequest {
 // The response message containing the greetings
 message HelloReply {
   string message = 1;
+}
+
+// The stream request message.
+message StreamRequest {
+}
+
+// The stream response message.
+message NumberReply {
+  int32 number = 1;
 }
