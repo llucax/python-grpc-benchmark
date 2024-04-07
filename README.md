@@ -90,7 +90,8 @@ bindings for the clients.
 
 ### Running
 
-Run `./benchmark` to run the benchmark.
+Run `./benchmark` to run the benchmark (to get slighly more stable results you
+might want to use `sudo nice -n-10 ./benchmark`).
 
 ### Cleanning up
 
