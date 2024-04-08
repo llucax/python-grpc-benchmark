@@ -21,14 +21,26 @@ writing, **about 2 times faster** than [grpcio] for a single request-reply
 roundtrip, and **about 1.5 times faster** than [grpcio] for streaming 10
 numbers.
 
+Also some basic memory benchmarks show that [betterproto]/[grpclib] uses less
+memory than [grpcio] (about 40% less memory for a single request-reply and
+about 70% less momory for streaming 10 numbers, resulting in the same reduction
+of minor page faults).
+
+For both libraries memory consumption seem to stay stable when processing more
+messages (request-reply or streaming).
+
 ```console
 $ ./benchmark 
 grpcio
-        1 request-reply:       100 loops, best of 5: 3.06 msec per loop
-        streaming 10 numbers:  100 loops, best of 5: 3.32 msec per loop
+        1 request-reply:       100 loops, best of 5: 2.98 msec per loop
+                                40352 KB max | 109;53936 in;voluntary context switches | 0;27767 major;minor page faults
+        streaming 10 numbers:  100 loops, best of 5: 2.86 msec per loop
+                                45548 KB max | 201;77380 in;voluntary context switches | 0;25620 major;minor page faults
 grpclib
-        1 request-reply:       200 loops, best of 5: 1.68 msec per loop
-        streaming 10 numbers:  100 loops, best of 5: 2.33 msec per loop
+        1 request-reply:       200 loops, best of 5: 1.39 msec per loop
+                                28560 KB max | 50;16684 in;voluntary context switches | 0;13323 major;minor page faults
+        streaming 10 numbers:  100 loops, best of 5: 2.25 msec per loop
+                                26840 KB max | 54;8232 in;voluntary context switches | 0;10396 major;minor page faults
 ```
 
 ### Test conditions
@@ -82,6 +94,7 @@ grpclib
 
 * Python 3.11+ (it probably works with other versions)
 * Docker (for the server)
+* [GNU time](https://www.gnu.org/software/time/) (for memory usage statistics)
 
 ### Building
 
