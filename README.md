@@ -43,6 +43,15 @@ grpclib
                                 26840 KB max | 54;8232 in;voluntary context switches | 0;10396 major;minor page faults
 ```
 
+Doing some tests with streaming more numbers (100.000) shows that
+[betterproto]/[grpclib] has a better throughput than [grpcio] (about 9.500
+numbers/second vs 12.500 numbers/second, so around 30% more throughput). The
+memory consumption remains lower in [betterproto]/[grpclib] than in [grpcio]
+though (about 60% less).
+
+It might be worth crafting a benchmark more oriented to test throughput to get
+more conclusive results.
+
 ### Test conditions
 
 * AMD Ryzen 7 PRO 5850U CPU
