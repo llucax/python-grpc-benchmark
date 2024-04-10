@@ -19,7 +19,9 @@ Also the performance comparison in the issue was using the sync version of
 My results show that [betterproto]/[grpclib] is actually, at the time of
 writing, **about 2 times faster** than [grpcio] for a single request-reply
 roundtrip, and **about 1.5 times faster** than [grpcio] for streaming 10
-numbers.
+numbers. Some preliminary tests show that for streaming numbers more
+continuously (100.000 numbers), **the throughput of [grpcio] is about 30%
+higher than [betterproto]/[grpclib]**.
 
 Also some basic memory benchmarks show that [betterproto]/[grpclib] uses less
 memory than [grpcio] (about 40% less memory for a single request-reply and
