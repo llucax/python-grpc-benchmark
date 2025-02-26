@@ -1,3 +1,8 @@
+> [!IMPORTANT]
+> This project is archived because [grpclib]'s author said there are [no plans for further development](https://github.com/vmagamedov/grpclib/issues/197#issuecomment-2249641932), so performance seems to be less important when choosing which library to use.
+> 
+> Also, if you are still interested, please check the results in [#2](https://github.com/llucax/python-grpc-benchmark/issues/2), as there are a few improvements to the way things are measured there.
+
 # Python gRPC implementations performance comparison
 
 This repository hosts a simple benchmark comparing [Google's
